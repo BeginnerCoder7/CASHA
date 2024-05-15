@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body,html{
+            background: url('aueec.jpg') center/cover no-repeat;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .form-container.registration-form {
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px 40px;
+        }
+        .sentence {
+            font-style: italic;
+            font-family: "Gill Sans", sans-serif;
+            text-align: center;
+            color:white;
+            margin-top: 50px;
+            margin-bottom:30px;
+
+        }
+        input {
+            background-color: #eee;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 15px;
+
+        }
+        input[type="password"] {
+        background-color: #eee;
+        border: none;
+        padding: 10px;
+        width: 95%;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        font-size: 15px;
+        padding-right: 30px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            border: 3px solid #000000;
+            color: #000000;
+            font-size: 13px;
+
+            width: 100%;
+            background: #d6d6d6;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+            border-radius: 5px;
+            padding: 12px 10px;
+            margin-left:10px;
+        }
+        button:hover {
+            background: rgb(0, 0, 0);
+            color: rgb(255, 255, 255);
+        }
+        .password-container {
+        position: relative;
+        margin-bottom: 10px; 
+        width:100%;
+
+        }
+        input[type="password"] {
+            padding-right: 30px;
+        }
+        #eye-icon, #confirm-eye-icon {
+            position: absolute;
+            right: 5px;
+            top: 40%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            width: 20px;
+            height: auto;
+        }
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: 200px;
+            margin-bottom:-70px;
+            margin-top:-50px;
+        }
+        .gender-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gender-container input[type="radio"] {
+    display: none;
+}
+
+.gender-container label {
+    display: inline-block;
+    background-color: #eee;
+    color: black;
+    padding: 5px 30px;
+    margin:-20px 20px -30px 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size:15px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+#male:checked + label {
+    background-color: rgb(152, 255, 255); 
+    color: black; 
+    font-weight:bold;
+}
+
+#female:checked + label {
+    background-color: rgb(255, 123, 143); 
+    color: black;
+    font-weight:bold;
+}
+
+        footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size:10px;
+            font-weight:bold;
+            margin-left:-8px;
+        }
+
+        .input-container {
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .input-container input:focus ~ label,
+        .input-container input:valid ~ label {
+            top: 00px;
+            font-size: 10px;
+            color: #ff8484;
+            font-weight:bold;
+        }
+
+        .input-container label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 15px;
+            color: #646464;
+            transition: 0.2s ease-out;
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container registration-form">
+            <form id="registrationForm" method="post" action="register.php" onsubmit="return validateForm()">
+                <div class="image-container">
+                    <img src="casha.png" alt="Casha Image">
+                </div> 
+                <div class="sentence">Register today to Empower Your Finances! </div>
+                <div class="input-container">
+                    <input type="text" name="firstName" id="firstName" required>
+                    <label for="firstName">First Name</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="lastName" id="lastName" required>
+                    <label for="lastName">Last Name</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="middleName" id="middleName">
+                    <label for="middleName">Middle Name (Optional)</label>
+                </div>
+                <div class="input-container">
+                    <input type="email" name="email" id="email" required>
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-container">
+                    <input type="number" name="phoneNumber" id="phoneNumber" required>
+                    <label for="phoneNumber">Phone Number</label>
+                </div>
+                <div class="input-container">
+                    <input type="date" name="birthdate" id="birthdate" required>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="address" id="address" required>
+                    <label for="address">Street/Barangay/Municipality</label>
+                </div>
+                <div class="gender-container">
+                    <input type="radio" name="gender" id="male" value="male" required>
+                    <label for="male">Male</label>
+                    <input type="radio" name="gender" id="female" value="female">
+                    <label for="female">Female</label>
+                </div><br><br>
+                <div class="input-container">
+                    <input type="text" name="username" id="username" maxlength="12" required>
+                    <label for="username">Username (Minimum 12 digits, numbers only)</label>
+                </div>
+                <div class="password-container input-container">
+                    <input type="password" name="password" id="password" minlength="8" required>
+                    <label for="password">Password (Minimum 8 characters)</label>
+                    <img src="closeeye.png" id="eye-icon" onclick="togglePasswordVisibility()" alt="Toggle Password Visibility">
+                </div>
+                <div class="password-container input-container">
+                    <input type="password" name="confirmPassword" id="confirmPassword" minlength="8" required>
+                    <label for="confirmPassword">Confirm Password</label>
+                    <img src="closeeye.png" id="confirm-eye-icon" onclick="toggleConfirmPasswordVisibility()" alt="Toggle Confirm Password Visibility">
+                </div>
+                <div class="button-container"><br>
+                    <button type="submit">Register</button>
+                    <button class="login-button" onclick="location.href='login.html'">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br><br>
+    <footer>
+        S.Y 2023-2024 ARELLANO UNIVERSITY ELISA ESGUERRA CAMPUS | CASHA
+    </footer>
+</body>
+<script>
+    document.getElementById("username").addEventListener("input", function(event) {
+    let inputValue = event.target.value;
+
+    let numericValue = inputValue.replace(/\D/g, '');
+
+    let limitedValue = numericValue.slice(0, 12);
+
+    event.target.value = limitedValue;
+});
+
+    function validateForm() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        
+        if (password !== confirmPassword) {
+            alert("Passwords do not match");
+            return false;
+        }
+        return true;
+    }
+    
+    function registrationSuccess() {
+        alert("Registration successful! You can now login.");
+        window.location.href = "login.html";
+    }
+
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("password");
+        var eyeIcon = document.getElementById("eye-icon");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.src = "openeye.png";
+        } else {
+            passwordInput.type = "password";
+            eyeIcon.src = "closeeye.png";
+        }
+    }
+
+    function toggleConfirmPasswordVisibility() {
+        var confirmPasswordInput = document.getElementById("confirmPassword");
+        var confirmEyeIcon = document.getElementById("confirm-eye-icon");
+        if (confirmPasswordInput.type === "password") {
+            confirmPasswordInput.type = "text";
+            confirmEyeIcon.src = "openeye.png";
+        } else {
+            confirmPasswordInput.type = "password";
+            confirmEyeIcon.src = "closeeye.png";
+        }
+    }
+    
+</script>
+</html>

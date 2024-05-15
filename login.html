@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Login Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background: #f6f5f7 url('aueec.jpg') center/cover no-repeat;
+            font-family: Tahoma, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: #FFFFFF;
+            border-radius: 5px;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+                        0 10px 10px rgba(0,0,0,0.22);
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
+        }
+        form {
+            padding: 20px 40px;
+        }
+        .input-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .input-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: auto;
+        }
+        input {
+            background-color: #eee;
+            border: none;
+            padding: 15px 40px 15px 35px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 15px;
+            font-style: italic;
+        }
+        button {
+            border: 2px solid #000000;
+            color: #000000;
+            font-size: 13px;
+            padding: 10px;
+            text-align: center;
+            width: 70%;
+            background: #d6d6d6;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: rgb(0, 0, 0);
+            color: rgb(255, 255, 255);
+        }
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        #eye-icon {
+            width: 25px;
+            height: auto;
+            margin-right: 10px;
+        }
+        .sentence {
+            font-style: italic;
+            text-align: center;
+            color:white;
+            margin-top: 20px;
+            margin-bottom:20px;
+        }
+        .logo {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        @media screen and (max-width: 768px) {
+            .form-container {
+                max-width: 90%;
+            }
+        }
+        .register-button {
+            border: 2px solid #000000;
+            color: #000000;
+            font-size: 12px;
+            padding: 15px;
+            width: 70%;
+            background: #d6d6d6;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+            border-radius: 5px;
+            margin-top: 20px;
+            padding: 10px;
+        }
+        .register-button:hover {
+            background: rgb(0, 0, 0);
+            color: rgb(255, 255, 255);
+        }
+        .button-container {
+            text-align: center;
+        }
+
+        footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size:10px;
+            font-weight:bold;
+        }
+        .input-container label {
+            position: absolute;
+            left: 40px;
+            font-style: italic;
+            top: 13px;
+            transition: top 0.3s, font-weight 0.3s, font-size 0.3s; 
+        }
+
+        .input-container input:focus + label,
+        .input-container input:not(:placeholder-shown) + label {
+            top: 0px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        h2{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="casha.png" alt="Casha Logo" class="logo"0 style="width:300px; margin-top:-210px; margin-bottom:-50px;">
+        <div class="sentence">Welcome Chiefs! Login first and start your journey with us.</div>
+    
+        <div class="form-container sign-in-container">
+            <form id="loginForm" method="post" action="login.php">
+                <h2>Sign in</h2>
+                <div class="input-container">
+                    <img src="Profile.png" class="input-icon" alt="User Icon">
+                    <input type="text" name="username" id="username" maxlength="12" placeholder=" " required>
+                    <label for="username">School ID</label>
+                </div>
+                <div class="input-container">
+                    <img src="password.png" class="input-icon" alt="Lock Icon">
+                    <input type="password" name="password" id="password" placeholder=" ">
+                    <label for="password">Password</label>
+                    <span class="toggle-password" onclick="togglePasswordVisibility()">
+                        <img id="eye-icon" src="openeye.png" alt="eye">
+                    </span>
+                </div>
+                
+                <div class="button-container">
+                    <button type="submit" id="loginButton">Sign In</button>
+                    <button class="register-button" onclick="location.href='registration.html'">Register</button>
+                </div>
+            </form>
+    
+        </div>
+    </div>
+    <footer>
+        S.Y 2023-2024 ARELLANO UNIVERSITY ELISA ESGUERRA CAMPUS | CASHA
+    </footer>
+    <script>
+            document.getElementById("username").addEventListener("input", function(event) {
+            let inputValue = event.target.value;
+
+            let numericValue = inputValue.replace(/\D/g, '');
+
+            let limitedValue = numericValue.slice(0, 12);
+
+            event.target.value = limitedValue;
+        });
+
+            function togglePasswordVisibility() {
+                var passwordInput = document.getElementById("password");
+                var eyeIcon = document.getElementById("eye-icon");
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    eyeIcon.src = "closeeye.png";
+                } else {
+                    passwordInput.type = "password";
+                    eyeIcon.src = "openeye.png";
+                }
+            }
+            $(document).ready(function() {
+            $('#loginForm').submit(function(e) {
+                e.preventDefault();
+                var form = $(this);
+                var url = form.attr('action');
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: form.serialize(),
+                    success: function(response) {
+                        if (response.trim() === "success") {
+                            alert("Login successful");
+                            window.location.href = "base.php"; 
+                        } else {
+                            alert("Invalid username or password");
+                        }
+                    }
+                });
+            });
+        });
+
+        window.onload = function() {
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+        };
+    </script>
+</body>
+</html>
